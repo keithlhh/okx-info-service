@@ -4,7 +4,9 @@ import axios from 'axios';
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { uniqueName = '563E3A78CDBAFB4E', limit = 100 } = req.query
   try {
-    const response = await axios.get(`https://www.okx.com/priapi/v5/ecotrade/public/trade-records?uniqueName=${uniqueName}&limit={limit}`);
+    const response = await axios.get(`https://www.okx.com/priapi/v5/ecotrade/public/trade-records?uniqueName=${uniqueName}&limit=${limit}`);
+
+
     res.json(response.data);
   } catch (error) {
       console.error(error);
