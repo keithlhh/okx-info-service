@@ -50,8 +50,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           }
         );
       }
-      res.json({...response.data});
-    }, 10000)
+      res.json({...response.data, count: global.count});
+    }, 4000)
   } catch (error) {
       console.error(error);
       res.status(500).send('Error fetching data');
