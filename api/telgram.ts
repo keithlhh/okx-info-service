@@ -3,6 +3,7 @@ import axios from 'axios';
 global.start = false;
 global.prev = '';
 global.timer = null;
+global.count = 0;
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { uniqueName = '563E3A78CDBAFB4E', run = '1' } = req.query;
@@ -34,11 +35,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const strData = JSON.stringify(data);
       const test = new Date().getSeconds();
       if (test == 30) {
+        global.count += 1;
         axios.post(
           "https://api.telegram.org/bot7456345325:AAGydyNYEeAXeNmJrxYmHY5zT3iNqlR6ycI/sendMessage",
           {
             chat_id: "1604598018",
-            text: new Date() + " " + "正在运行中...",
+            text: new Date() + " " + "正在运行中..." + global.count,
           }
         );
       }
