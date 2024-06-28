@@ -31,7 +31,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const data = response?.data?.data;
       const strData = JSON.stringify(data);
       const test = new Date().getSeconds();
-      if (test == 30) {
+      // if (test == 30) {
         global.count += 1;
         axios.post(
           "https://api.telegram.org/bot7456345325:AAGydyNYEeAXeNmJrxYmHY5zT3iNqlR6ycI/sendMessage",
@@ -40,7 +40,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             text: new Date() + " " + "正在运行中..." + global.count,
           }
         );
-      }
+      // }
       if (strData !== global.prev) {
         axios.post(
           "https://api.telegram.org/bot7456345325:AAGydyNYEeAXeNmJrxYmHY5zT3iNqlR6ycI/sendMessage",
