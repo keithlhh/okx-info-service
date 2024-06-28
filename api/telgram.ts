@@ -4,7 +4,12 @@ global.start = false;
 global.prev = '';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const { uniqueName = '563E3A78CDBAFB4E' } = req.query;
+  const { uniqueName = '563E3A78CDBAFB4E', run = '1' } = req.query;
+  if (run == '0') {
+    global.start = false;
+    global.prev = '';
+    return;
+  }
   if (global.start) {
     res.json({
       message: 'Already running',
