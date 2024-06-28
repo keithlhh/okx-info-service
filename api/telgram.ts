@@ -16,7 +16,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       message: 'Already stop',
     });
     return;
-    return;
   }
   if (global.start) {
     res.json({
@@ -27,9 +26,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     global.start = true;
     global.timer = setInterval(async () => {
-      global.start = true;
       const response = await axios.get(`https://www.okx.com/priapi/v5/ecotrade/public/positions-v2?uniqueName=${uniqueName}`);
-      res.json(response.data);
   
       const data = response?.data?.data;
       const strData = JSON.stringify(data);
@@ -53,6 +50,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           }
         );
       }
+      res.json(response.data);
     }, 2000)
   } catch (error) {
       console.error(error);
