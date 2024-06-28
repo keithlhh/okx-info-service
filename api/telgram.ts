@@ -2,12 +2,15 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import axios from 'axios';
 global.start = false;
 global.prev = '';
+global.timer = null;
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { uniqueName = '563E3A78CDBAFB4E', run = '1' } = req.query;
+  const timer = null;
   if (run == '0') {
     global.start = false;
     global.prev = '';
+    global.timer = null;
     return;
   }
   if (global.start) {
@@ -18,7 +21,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
   try {
     global.start = true;
-    setInterval(async () => {
+    global.timer = setInterval(async () => {
       global.start = true;
       const response = await axios.get(`https://www.okx.com/priapi/v5/ecotrade/public/positions-v2?uniqueName=${uniqueName}`);
       res.json(response.data);
