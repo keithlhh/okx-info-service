@@ -11,6 +11,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     global.start = false;
     global.prev = '';
     global.timer = null;
+    res.json({
+      message: 'Already stop',
+    });
+    return;
     return;
   }
   if (global.start) {
