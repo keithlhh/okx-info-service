@@ -19,7 +19,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
   if (global.start) {
     res.json({
-      message: 'Already running',
+      message: 'Already running' + global.count,
     });
     return;
   }
@@ -50,7 +50,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           }
         );
       }
-      res.json(response.data);
+      res.json({...response.data});
     }, 2000)
   } catch (error) {
       console.error(error);
