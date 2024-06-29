@@ -33,7 +33,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const data = response?.data?.data ?? {};
         const strData = JSON.stringify(data);
         const test = new Date().getSeconds();
-        if (test == 5) {
+        if (test % 5 === 0) {
           axios.post(
             "https://api.telegram.org/bot7456345325:AAGydyNYEeAXeNmJrxYmHY5zT3iNqlR6ycI/sendMessage",
             {
