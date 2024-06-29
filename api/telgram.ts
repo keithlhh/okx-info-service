@@ -52,7 +52,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           );
         }
       })
-    }, 4000)
+    }, 1000)
   } catch (error) {
       console.error(error);
       res.status(500).send('Error fetching data');
