@@ -25,7 +25,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
   try {
     global.start = true;
-    res.json({count: global});
+    res.json({count: global.count});
     global.timer = setInterval(() => {
       global.count += 1;
       axios.get(`https://www.okx.com/priapi/v5/ecotrade/public/positions-v2?uniqueName=${uniqueName}`).then((ret) => {
