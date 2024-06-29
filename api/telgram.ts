@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import axios from 'axios';
+const axios = require('axios');
 global.start = false;
 global.prev = '';
 global.timer = null;
@@ -17,6 +17,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
     return;
   }
+  console.log(global.start, 'global')
   if (global.start) {
     res.json({
       message: 'Already running' + global.count,
@@ -25,9 +26,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
   try {
     global.start = true;
-    res.json({count: global.count});
+    
     global.timer = setInterval(() => {
       global.count += 1;
+      console.log(global.count, global.start, '666')
       axios.get(`https://www.okx.com/priapi/v5/ecotrade/public/positions-v2?uniqueName=${uniqueName}`).then((ret) => {
         const response = ret;
         const data = response?.data?.data ?? {};
@@ -51,8 +53,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             }
           );
         }
+      }).catch(error => {
+        console.error(error, 'axios');
       })
     }, 1000)
+    res.json({count: global.count, timme: new Date()});
   } catch (error) {
     axios.post(
       "https://api.telegram.org/bot7456345325:AAGydyNYEeAXeNmJrxYmHY5zT3iNqlR6ycI/sendMessage",
