@@ -34,16 +34,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const response = ret;
         const data = response?.data?.data ?? {};
         const strData = JSON.stringify(data);
-        const test = new Date().getSeconds();
-        if (test % 5 === 0) {
-          axios.post(
-            "https://api.telegram.org/bot7456345325:AAGydyNYEeAXeNmJrxYmHY5zT3iNqlR6ycI/sendMessage",
-            {
-              chat_id: "1604598018",
-              text: new Date() + " " + "正在运行中..." + global.count,
-            }
-          );
-        }
+        axios.post(
+          "https://api.telegram.org/bot7456345325:AAGydyNYEeAXeNmJrxYmHY5zT3iNqlR6ycI/sendMessage",
+          {
+            chat_id: "1604598018",
+            text: new Date() + " " + "正在运行中..." + global.count,
+          }
+        );
         if (strData !== global.prev) {
           axios.post(
             "https://api.telegram.org/bot7456345325:AAGydyNYEeAXeNmJrxYmHY5zT3iNqlR6ycI/sendMessage",
@@ -56,7 +53,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }).catch(error => {
         console.error(error, 'axios');
       })
-    }, 1000)
+    }, 2000)
     res.json({count: global.count, timme: new Date()});
   } catch (error) {
     axios.post(
