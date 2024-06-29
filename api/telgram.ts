@@ -30,7 +30,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       global.count += 1;
       axios.get(`https://www.okx.com/priapi/v5/ecotrade/public/positions-v2?uniqueName=${uniqueName}`).then((ret) => {
         const response = ret;
-        const data = response?.data?.data;
+        const data = response?.data?.data ?? {};
         const strData = JSON.stringify(data);
         const test = new Date().getSeconds();
         if (test == 30) {
