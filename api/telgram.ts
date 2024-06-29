@@ -27,13 +27,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     global.start = true;
     res.json({count: global});
     global.timer = setInterval(() => {
+      global.count += 1;
       axios.get(`https://www.okx.com/priapi/v5/ecotrade/public/positions-v2?uniqueName=${uniqueName}`).then((ret) => {
         const response = ret;
         const data = response?.data?.data;
         const strData = JSON.stringify(data);
         const test = new Date().getSeconds();
         if (test == 30) {
-          global.count += 1;
           axios.post(
             "https://api.telegram.org/bot7456345325:AAGydyNYEeAXeNmJrxYmHY5zT3iNqlR6ycI/sendMessage",
             {
