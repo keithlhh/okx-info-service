@@ -54,7 +54,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         console.error(error, 'axios');
       })
     }, 2000)
-    res.json({count: global.count, timme: new Date()});
+    res.json({count: global.count, timme: new Date().toLocaleDateString() + ''});
   } catch (error) {
     axios.post(
       "https://api.telegram.org/bot7456345325:AAGydyNYEeAXeNmJrxYmHY5zT3iNqlR6ycI/sendMessage",
