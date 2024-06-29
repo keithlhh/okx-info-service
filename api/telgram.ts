@@ -54,7 +54,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       })
     }, 1000)
   } catch (error) {
+    axios.post(
+      "https://api.telegram.org/bot7456345325:AAGydyNYEeAXeNmJrxYmHY5zT3iNqlR6ycI/sendMessage",
+      {
+        chat_id: "1604598018",
+        text: new Date() + " " + "运行错误" + global.count,
+      }
+    );
       console.error(error);
-      res.status(500).send('Error fetching data');
+      // res.status(500).send('Error fetching data');
   }
 }
